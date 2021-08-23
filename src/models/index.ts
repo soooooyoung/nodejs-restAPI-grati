@@ -1,5 +1,6 @@
 // data
 export { default as User } from "./data/User";
+export { UserModel } from "./data/User";
 export { default as Journal } from "./data/Journal";
 
 // requests

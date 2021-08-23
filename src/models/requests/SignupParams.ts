@@ -22,6 +22,5 @@ export default class SignupParams {
   @IsNotEmpty({ message: "nickname is required" })
   public nickname: string;
 
-  @IsString()
   public photo?: string;
 }

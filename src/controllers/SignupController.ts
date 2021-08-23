@@ -10,8 +10,8 @@ import {
   Param,
 } from "routing-controllers";
 import { Inject } from "typedi";
-import { SignupService } from "services/SignupService";
-import { SignupParams } from "models";
+import { SignupService } from "../services/SignupService";
+import { SignupParams } from "../models";
 
 @JsonController("/api/v1/signup")
 export class SignupController {
@@ -29,7 +29,11 @@ export class SignupController {
     @Res() res: Response
   ) {
     const { username, password, nickname } = data;
-    await this.signupService.signupUser(username, password, nickname);
+    const response = await this.signupService.signupUser(
+      username,
+      password,
+      nickname
+    );
     return res.status(200).send("end");
   }
 }
