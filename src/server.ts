@@ -19,7 +19,7 @@ export class ScrapeServer {
   }
 
   /**
-   * Start scrape server.
+   * Start server.
    */
   public async startServer(): Promise<void> {
     useContainer(Container);

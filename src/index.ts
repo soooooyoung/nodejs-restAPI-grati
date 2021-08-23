@@ -1,7 +1,7 @@
 "use strict";
 import "reflect-metadata";
 import { ScrapeServer } from "./server";
-import { MongoRepo } from "./database/MongoRepository";
+import { MongoRepo } from "./repository/MongoRepository";
 
 async function start(): Promise<void> {
   const scrapeServer = new ScrapeServer();
