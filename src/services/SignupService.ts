@@ -11,6 +11,15 @@ export class SignupService {
     photo?: string
   ) {
     try {
+      // 아이디 중복 확인
+      const existingUser = await UserModel.findOne({
+        username,
+      });
+      if (existingUser) {
+        throw Error("Username is already taken");
+      }
+
+      // 회원 모델 생성
       const created = moment().unix();
       const newUser = new UserModel({
         created,
@@ -21,9 +30,11 @@ export class SignupService {
           photo,
         },
       });
+
+      // 회원 가입
       return await newUser.save();
     } catch (error) {
-      console.log("Something went wrong: Service: Signup: createUser", error);
+      console.log("Something went wrong: Service: Signup: signupUser", error);
       throw error;
     }
   }

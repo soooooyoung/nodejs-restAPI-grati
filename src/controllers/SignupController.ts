@@ -22,18 +22,38 @@ export class SignupController {
    * 회원가입
    */
   @HttpCode(201)
-  @Post("/")
-  public async getAccountsInfo(
+  @Post("")
+  public async signup(
     @Body() data: SignupParams,
     @Req() req: Request,
     @Res() res: Response
   ) {
-    const { username, password, nickname } = data;
-    const response = await this.signupService.signupUser(
-      username,
-      password,
-      nickname
-    );
-    return res.status(200).send("end");
+    try {
+      const { username, password, nickname } = data;
+      const response = await this.signupService.signupUser(
+        username,
+        password,
+        nickname
+      );
+      return res.status(200).json({
+        status: "success",
+        result: response,
+      });
+    } catch (e) {
+      if (e instanceof Error) {
+        return res.status(200).json({
+          status: "fail",
+          result: {
+            message: e.message,
+          },
+        });
+      }
+      return res.status(500).json({
+        status: "fail",
+        result: {
+          message: "회원가입에 문제가 발생했습니다",
+        },
+      });
+    }
   }
 }
